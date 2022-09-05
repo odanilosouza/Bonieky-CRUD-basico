@@ -1,20 +1,30 @@
 <?php
-
 require 'config.php';
 
 $name = filter_input(INPUT_POST, 'name');
 $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 
-if($name && $email) {
+if($name && $email){
 
-  $sql = $pdo->prepare("INSERT INTO  usuarios (nome, email) VALUES (:name, email)");
-  $sql->bindValeu(':name', $name);
+  $sql = $pdo->prepare("SELECT * FROM usuarios WHERE email = :email");
   $sql->bindValue(':email', $email);
   $sql->execute();
 
-  header("Locarion: index.php");
+  if($sql->rowCount() === 0){
+    $sql = $pdo->prepare("INSERT INTO  usuarios (nome, email) VALUES (:name, :email)");
+    $sql->bindValue(':name', $name);
+    $sql->bindValue('email', $email);
+    $sql->execute();
 
-} else {
+    header("Location:index.php");
+  } else {
   header("Location: adicionar.php");
   exit;
 }
+} else {
+  header("Location: adicionar.php");
+  exit;
+  
+}
+
+ 

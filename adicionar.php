@@ -1,15 +1,15 @@
-<h1>Adicionar Usuário</h1>
-<form method="POST" action="adicionar_action.php">
+<h1>Adicionar usuário</h1>
+<form action="adicionar_action.php" method="post">
   <label>
     Nome:
-</br>
-<input type="text" name=name />
-  </label>
+    <input type="text" name="name">
+  </label> <br/><br/>
 
   <label>
     Email:
-  <input type="text" name="email">
-  </label>
+    <input type="email" name="email">
+  </label> <br/><br/>
 
-  <input type="submit" value="Adicionar" />
+  <input type="submit" value="Adicionar">
+
 </form>
